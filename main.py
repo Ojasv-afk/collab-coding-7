@@ -36,13 +36,15 @@ def is_prime(n):
     return True
 
 
-# 22bcs068 (Reverse a String)
+# 22bcs068 (Even/odd number)
 
-def reverse_string(s):
-    return s[::-1]
+def check_odd_even(num: int) -> str:
+    if num % 2 == 0:
+        return f"{num} is Even"
+    else:
+        return f"{num} is Odd"
 
-# Example
-text = "Hello World"
-print("Original:", text)
-print("Reversed:", reverse_string(text))
+# Example usage
+print(check_odd_even(10))  # Even
+print(check_odd_even(7))   # Odd
 
