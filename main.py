@@ -13,21 +13,21 @@ def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
-# 22bcs081(Factorial)
-def factorial(n):
+# 22bcs081(Prime)
+def is_prime(n: int) -> bool:
     """
-    Factorial function
-    Author
-    :param n: non-negative integer
-    :return: n!
+    Check if a number is prime.
+    Author: Snehith
     """
-    if not isinstance(n, int):
-        raise TypeError("Input must be a non-negative integer.")
-    if n < 0:
-        raise ValueError("Input must be a non-negative integer.")
-    if n == 0:
-        return 1
-    result = 1
-    for i in range(1, n + 1):
-        result *= i
-    return result
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
