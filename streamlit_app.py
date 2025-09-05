@@ -17,17 +17,6 @@ st.markdown("""
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
     
-    /* Remove top padding */
-    .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 0rem !important;
-    }
-
-    /* Remove top margin from main container */
-    .main .block-container {
-        margin-top: 0rem !important;
-    }
-    
     /* Headers with gradient text */
     .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
         background: linear-gradient(90deg, #4CAF50, #00BCD4);
@@ -192,7 +181,7 @@ st.markdown("""
 def main():
     # Title with emoji and animation
     st.markdown("""
-        <div style='background: rgba(45, 45, 45, 0.2); padding: 1rem; border-radius: 10px; margin: 0; backdrop-filter: blur(10px);'>
+        <div style='background: rgba(45, 45, 45, 0.2); padding: 1rem; border-radius: 10px; margin: 1rem 0; backdrop-filter: blur(10px);'>
             <h1 style='text-align: center; animation: fadeIn 1s ease-in; margin: 0; background: linear-gradient(90deg, #00fff2, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
                 🧮 Mathematical Functions Calculator
             </h1>
@@ -205,6 +194,12 @@ def main():
         </style>
     """, unsafe_allow_html=True)
     
+    # Animated description
+    st.markdown("""
+        <p style='text-align: center; color: #00fff2; margin-bottom: 2rem;'>
+            Explore different mathematical operations with our interactive calculator!
+        </p>
+    """, unsafe_allow_html=True)
     
     # Create tabs with icons
     tab1, tab2, tab3 = st.tabs([
