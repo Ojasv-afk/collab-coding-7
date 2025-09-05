@@ -1,6 +1,7 @@
 from main import is_prime
 
 def test_prime():
+
     # Small primes
     assert is_prime(2) == True
     assert is_prime(3) == True
@@ -21,9 +22,16 @@ def test_prime():
 
     # Larger non-primes
     assert is_prime(100) == False
+
+    assert is_prime(121) == False   # 11 * 11
+
     assert is_prime(121) == False 
+
 
     print("All prime tests passed!")
 
 if __name__ == "__main__":
+
+    main()
+
     test_prime()

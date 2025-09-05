@@ -12,8 +12,10 @@ def gcd(a, b):
     """
     while b:
         a, b = b, a % b
-    return a
-# 22bcs081(Prime)
+
+    return a 
+
+# 22bcs081 (Prime Number)
 def is_prime(n: int) -> bool:
     """
     Check if a number is prime.
@@ -31,3 +33,17 @@ def is_prime(n: int) -> bool:
             return False
         i += 6
     return True
+
+
+
+# 22bcs068 (Even/odd number)
+
+def check_odd_even(num: int) -> str:
+    if num % 2 == 0:
+        return f"{num} is Even"
+    else:
+        return f"{num} is Odd"
+
+# Example usage
+print(check_odd_even(10))  # Even
+print(check_odd_even(7))   # Odd
