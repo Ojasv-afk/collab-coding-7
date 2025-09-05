@@ -44,9 +44,9 @@ def check_odd_even(num: int) -> str:
     else:
         return f"{num} is Odd"
 
-# Example usage
-print(check_odd_even(10))  # Even
-print(check_odd_even(7))   # Odd
+# # Example usage
+# print(check_odd_even(10))  # Even
+# print(check_odd_even(7))   # Odd
 
 
 # 22BCS080 (Matrix Operations)
