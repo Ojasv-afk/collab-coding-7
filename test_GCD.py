@@ -1,6 +1,6 @@
 from main import gcd
 
-def main():
+def test_gcd():
     assert gcd(10, 15) == 5
     assert gcd(7, 3) == 1
 
@@ -14,4 +14,4 @@ def main():
     print("All tests passed!")
 
 if __name__ == "__main__":
-    main()
+    test_gcd()

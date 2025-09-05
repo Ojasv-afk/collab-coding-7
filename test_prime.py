@@ -1,6 +1,6 @@
 from main import is_prime
 
-def main():
+def test_prime():
     # Small primes
     assert is_prime(2) == True
     assert is_prime(3) == True
@@ -26,4 +26,4 @@ def main():
     print("All prime tests passed!")
 
 if __name__ == "__main__":
-    main()
+    test_prime()
