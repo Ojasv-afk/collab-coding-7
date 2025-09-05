@@ -4,3 +4,30 @@ Starter File for Collab Coding
 Group ID: 7
 """
 # Collaborators add function here:
+# 22bcs077(GCD)
+def gcd(a, b):
+    """
+    GCD function
+    Author: Ojasv-afk
+    """
+    while b:
+        a, b = b, a % b
+    return a
+# 22bcs081(Prime)
+def is_prime(n: int) -> bool:
+    """
+    Check if a number is prime.
+    Author: Snehith
+    """
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
