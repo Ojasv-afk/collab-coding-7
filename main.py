@@ -15,15 +15,7 @@ def gcd(a, b):
 
     return a 
 
-# ...existing code...
 # 22bcs081 (Prime Number)
-def is_prime(n):
-    """
-    Check if a number is prime
-    Author: 22bcs081
-=======
-    return a
-# 22bcs081(Prime)
 def is_prime(n: int) -> bool:
     """
     Check if a number is prime.
