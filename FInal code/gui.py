@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, simpledialog
 from main import *
 import tkinter.font as tkfont
 
@@ -34,6 +34,7 @@ class MathFunctionsGUI:
         self.create_gcd_tab()
         self.create_prime_tab()
         self.create_evenodd_tab()
+        self.create_matrix_tab()
     
     def setup_styles(self):
         # Configure styles for modern look
@@ -173,6 +174,118 @@ class MathFunctionsGUI:
             self.evenodd_result.config(text=f"{num} is {result}")
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid number")
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
+    #Matrix Operations Tab (22BCS080)
+    def create_matrix_tab(self):
+        matrix_frame = ttk.Frame(self.notebook, style='Main.TFrame')
+        self.notebook.add(matrix_frame, text='Matrix Operations')
+
+        content = ttk.Frame(matrix_frame, style='Main.TFrame')
+        content.pack(expand=True, pady=20)
+
+        # Matrix A input
+        ttk.Label(content, text="Matrix A (rows and columns)", style='Modern.TLabel').pack()
+        self.mat_a_rows = self.create_input_field(content, "Rows:")
+        self.mat_a_cols = self.create_input_field(content, "Cols:")
+
+        self.mat_a_entries = []
+
+        def generate_matrix_a_fields():
+            for e in self.mat_a_entries:
+                e.destroy()
+            self.mat_a_entries.clear()
+            try:
+                rows = int(self.mat_a_rows.get())
+                cols = int(self.mat_a_cols.get())
+                for i in range(rows):
+                    row_entry = self.create_input_field(content, f"Row {i+1} (space separated):")
+                    self.mat_a_entries.append(row_entry)
+            except:
+                messagebox.showerror("Error", "Enter valid rows and columns")
+
+        ModernButton(content, text="Generate Matrix A Fields", command=generate_matrix_a_fields).pack(pady=5)
+
+        # Operation selection
+        ttk.Label(content, text="Select Operation", style='Modern.TLabel').pack(pady=5)
+        self.matrix_op = ttk.Combobox(content, values=["Transpose", "Add another matrix", "Multiply by another matrix", "Determinant", "Power"])
+        self.matrix_op.pack(pady=5)
+
+        # Matrix B input (only shown when needed)
+        self.mat_b_frame = ttk.Frame(content, style='Main.TFrame')
+        self.mat_b_frame.pack(expand=True, pady=10)
+        self.mat_b_rows = None
+        self.mat_b_cols = None
+        self.mat_b_entries = []
+
+        def generate_matrix_b_fields():
+            for e in self.mat_b_entries:
+                e.destroy()
+            self.mat_b_entries.clear()
+            try:
+                rows = int(self.mat_b_rows.get())
+                cols = int(self.mat_b_cols.get())
+                for i in range(rows):
+                    row_entry = self.create_input_field(self.mat_b_frame, f"Row {i+1} (space separated):")
+                    self.mat_b_entries.append(row_entry)
+            except:
+                messagebox.showerror("Error", "Enter valid rows and columns")
+
+        def show_matrix_b_fields(*args):
+            for widget in self.mat_b_frame.winfo_children():
+                widget.destroy()
+            self.mat_b_entries.clear()
+            if self.matrix_op.get() in ["Add another matrix", "Multiply by another matrix"]:
+                ttk.Label(self.mat_b_frame, text="Matrix B (rows and columns)", style='Modern.TLabel').pack()
+                self.mat_b_rows = self.create_input_field(self.mat_b_frame, "Rows:")
+                self.mat_b_cols = self.create_input_field(self.mat_b_frame, "Cols:")
+                ModernButton(self.mat_b_frame, text="Generate Matrix B Fields", command=generate_matrix_b_fields).pack(pady=5)
+
+        self.matrix_op.bind("<<ComboboxSelected>>", show_matrix_b_fields)
+
+        self.matrix_result = ttk.Label(content, text="", style='Result.TLabel')
+        self.matrix_result.pack(pady=10)
+
+        ModernButton(content, text="Run Operation", command=self.run_matrix_op).pack(pady=10)
+
+
+    def run_matrix_op(self):
+        try:
+            # Read Matrix A
+            A_data = [list(map(int, e.get().split())) for e in self.mat_a_entries]
+            A = Matrix(A_data)
+            op = self.matrix_op.get()
+
+            # For Add/Multiply, read Matrix B
+            B = None
+            if op in ["Add another matrix", "Multiply by another matrix"]:
+                if not self.mat_b_entries:
+                    messagebox.showerror("Error", "Matrix B fields not filled")
+                    return
+                B_data = [list(map(int, e.get().split())) for e in self.mat_b_entries]
+                B = Matrix(B_data)
+
+            # Perform selected operation
+            if op == "Transpose":
+                result = A.transpose()
+            elif op == "Determinant":
+                result = A.determinant()
+            elif op == "Power":
+                k = simpledialog.askinteger("Power", "Enter k:")
+                if k is None:
+                    return
+                result = A.power(k)
+            elif op == "Add another matrix" and B:
+                result = A.add(B)
+            elif op == "Multiply by another matrix" and B:
+                result = A.multiply(B)
+            else:
+                messagebox.showerror("Error", "Invalid operation or missing Matrix B")
+                return
+
+            self.matrix_result.config(text=str(result))
+
         except Exception as e:
             messagebox.showerror("Error", str(e))
 
