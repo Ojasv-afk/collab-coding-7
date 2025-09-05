@@ -36,3 +36,13 @@ def is_prime(n):
     return True
 
 
+# 22bcs068 (Reverse a String)
+
+def reverse_string(s):
+    return s[::-1]
+
+# Example
+text = "Hello World"
+print("Original:", text)
+print("Reversed:", reverse_string(text))
+
