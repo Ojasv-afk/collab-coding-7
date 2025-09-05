@@ -36,6 +36,19 @@
      - Created test suite (test_even_odd.py)
      - Contributed to GUI development and styling
 
+4. **Roll No: 22bcs080**
+   - Role: Matrix Operations Developer
+   - Team Dynamics:
+      - Contributed in discussions regarding the UI
+      - Contributed in maintaining effective version control based on seperate branches and effective PR
+      - Assisted other members whenever and wherever needed
+   - Technical Dynamics:
+      - Created class methods and functions to perform simple matrix operations that include transpose, addition, multiplication,power and determinant
+      - Created Testing file for test cases
+      - Updated the Streamlit UI to include the latest matrix operations tab with effective error handling and user input for every stage
+      - Updated TinkerUI to include matrix operations
+
+
 ## Challenges Faced
 
 1. **Code Integration**
