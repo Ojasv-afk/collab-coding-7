@@ -207,10 +207,11 @@ def main():
     
     
     # Create tabs with icons
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "🔢 GCD Calculator",
         "🎯 Prime Checker",
-        "⚖️ Even/Odd Checker"
+        "⚖️ Even/Odd Checker",
+        "🧮 Matrix Operations"
     ])
     
     # GCD Calculator Tab
@@ -263,6 +264,86 @@ def main():
                 st.success(f"{int(num)} is {result}")
             except Exception as e:
                 st.error(f"Error: {str(e)}")
+
+    # Matrix Operations Tab (22BCS080)
+    with tab4:
+        st.header("Matrix Operations")
+
+        # ---------------- Matrix A Input ----------------
+        st.subheader("Matrix A")
+        rows_a = st.number_input("Number of rows for Matrix A", min_value=1, step=1, key="a_rows")
+        cols_a = st.number_input("Number of columns for Matrix A", min_value=1, step=1, key="a_cols")
+
+        matrix_a_data = []
+        for i in range(rows_a):
+            row = st.text_input(f"Enter row {i+1} of Matrix A (space separated)", key=f"a_row_{i}")
+            if row:
+                try:
+                    matrix_a_data.append(list(map(int, row.strip().split())))
+                except ValueError:
+                    st.error(f"Invalid input in row {i+1}. Please enter integers only.")
+
+        if len(matrix_a_data) == rows_a and all(len(r) == cols_a for r in matrix_a_data):
+            A = Matrix(matrix_a_data)
+
+            # ---------------- Select Operation ----------------
+            op = st.selectbox("Select operation", [
+                "Transpose",
+                "Add another matrix",
+                "Multiply by another matrix",
+                "Determinant",
+                "Power"
+            ])
+
+            # ---------------- Matrix B Input (if required) ----------------
+            B = None
+            if op in ["Add another matrix", "Multiply by another matrix"]:
+                st.subheader("Matrix B")
+                rows_b = st.number_input("Number of rows for Matrix B", min_value=1, step=1, key="b_rows")
+                cols_b = st.number_input("Number of columns for Matrix B", min_value=1, step=1, key="b_cols")
+
+                matrix_b_data = []
+                for i in range(rows_b):
+                    row = st.text_input(f"Enter row {i+1} of Matrix B (space separated)", key=f"b_row_{i}")
+                    if row:
+                        try:
+                            matrix_b_data.append(list(map(int, row.strip().split())))
+                        except ValueError:
+                            st.error(f"Invalid input in B row {i+1}. Please enter integers only.")
+
+                if len(matrix_b_data) == rows_b and all(len(r) == cols_b for r in matrix_b_data):
+                    B = Matrix(matrix_b_data)
+
+            # ---------------- Power Input (if required) ----------------
+            k = None
+            if op == "Power":
+                k = st.number_input("Enter power k", min_value=1, step=1, key="matrix_power")
+
+            # ---------------- Run Operation Button ----------------
+            if st.button("Run Operation"):
+                try:
+                    if op == "Transpose":
+                        st.write("Result:")
+                        st.write(A.transpose())
+                    elif op == "Add another matrix" and B:
+                        st.write("Result:")
+                        st.write(A.add(B))
+                    elif op == "Multiply by another matrix" and B:
+                        st.write("Result:")
+                        st.write(A.multiply(B))
+                    elif op == "Determinant":
+                        st.write("Result:")
+                        st.write(A.determinant())
+                    elif op == "Power" and k is not None:
+                        st.write("Result:")
+                        st.write(A.power(k))
+                    else:
+                        st.warning("Invalid operation or incomplete inputs")
+                except Exception as e:
+                    st.error(str(e))
+        else:
+            st.info("Please complete all rows of Matrix A to perform operations.")
+
 
 if __name__ == "__main__":
     main()
