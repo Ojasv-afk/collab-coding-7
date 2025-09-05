@@ -33,6 +33,7 @@ class MathFunctionsGUI:
         # Create tabs
         self.create_gcd_tab()
         self.create_prime_tab()
+        self.create_evenodd_tab()
     
     def setup_styles(self):
         # Configure styles for modern look
@@ -146,6 +147,32 @@ class MathFunctionsGUI:
                 text=f"{num} is {'prime' if result else 'not prime'}")
         except ValueError:
             messagebox.showerror("Error", "Please enter valid numbers")
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
+    def create_evenodd_tab(self):
+        evenodd_frame = ttk.Frame(self.notebook, style='Main.TFrame')
+        self.notebook.add(evenodd_frame, text='Even/Odd Checker')
+        
+        # Content wrapper for centering
+        content = ttk.Frame(evenodd_frame, style='Main.TFrame')
+        content.pack(expand=True, pady=20)
+        
+        self.evenodd_num = self.create_input_field(content, "Enter Number:")
+        
+        ModernButton(content, text="Check Even/Odd", 
+                    command=self.check_evenodd).pack(pady=20)
+        
+        self.evenodd_result = ttk.Label(content, text="", style='Result.TLabel')
+        self.evenodd_result.pack(pady=10)
+
+    def check_evenodd(self):
+        try:
+            num = int(self.evenodd_num.get())
+            result = "even" if num % 2 == 0 else "odd"
+            self.evenodd_result.config(text=f"{num} is {result}")
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid number")
         except Exception as e:
             messagebox.showerror("Error", str(e))
 

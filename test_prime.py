@@ -31,7 +31,4 @@ def test_prime():
     print("All prime tests passed!")
 
 if __name__ == "__main__":
-
-    main()
-
     test_prime()
