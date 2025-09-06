@@ -35,6 +35,7 @@ class MathFunctionsGUI:
         self.create_prime_tab()
         self.create_evenodd_tab()
         self.create_matrix_tab()
+        self.create_factorial_tab()   # ✅ NEW TAB for factorial
     
     def setup_styles(self):
         # Configure styles for modern look
@@ -288,6 +289,36 @@ class MathFunctionsGUI:
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
+    # Factorial Tab (22BCS071)
+    def create_factorial_tab(self):
+        factorial_frame = ttk.Frame(self.notebook, style='Main.TFrame')
+        self.notebook.add(factorial_frame, text='Factorial Calculator')
+
+        content = ttk.Frame(factorial_frame, style='Main.TFrame')
+        content.pack(expand=True, pady=20)
+
+        self.factorial_num = self.create_input_field(content, "Enter Number:")
+
+        ModernButton(content, text="Calculate Factorial", 
+                    command=self.calculate_factorial).pack(pady=20)
+
+        self.factorial_result = ttk.Label(content, text="", style='Result.TLabel')
+        self.factorial_result.pack(pady=10)
+
+    def calculate_factorial(self):
+        try:
+            num = int(self.factorial_num.get())
+            if num < 0:
+                messagebox.showerror("Error", "Please enter a non-negative integer")
+                return
+            result = factorial(num)
+            self.factorial_result.config(text=f"Factorial: {result}")
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid integer")
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
 
 if __name__ == "__main__":
     root = tk.Tk()

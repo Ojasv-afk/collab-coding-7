@@ -48,6 +48,15 @@
       - Updated the Streamlit UI to include the latest matrix operations tab with effective error handling and user input for every stage
       - Updated TinkerUI to include matrix operations
 
+5. **Roll No: 22bcs071**
+   - Role: Factorial Function Developer 
+   - Technical Dynamics:
+      - Created class methods and functions to perform simple Factorial Function
+      - Created Testing file for test cases
+      - Updated the Streamlit UI to include the latest Factorial Function tab with effective error handling and user input for every stage
+      - Updated TinkerUI to include Factorial Function
+
+
 
 ## Challenges Faced
 

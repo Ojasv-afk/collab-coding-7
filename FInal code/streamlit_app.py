@@ -207,11 +207,12 @@ def main():
     
     
     # Create tabs with icons
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5= st.tabs([
         "🔢 GCD Calculator",
         "🎯 Prime Checker",
         "⚖️ Even/Odd Checker",
-        "🧮 Matrix Operations"
+        "🧮 Matrix Operations",
+        "📊 Factorial Calculator"
     ])
     
     # GCD Calculator Tab
@@ -343,6 +344,19 @@ def main():
                     st.error(str(e))
         else:
             st.info("Please complete all rows of Matrix A to perform operations.")
+
+      # ---------------- Factorial Calculator Tab (22BCS071) ----------------
+    with tab5:
+        st.header("Factorial Calculator")
+
+        num = st.number_input("Enter a non-negative integer", min_value=0, step=1, key="factorial_num")
+
+        if st.button("Calculate Factorial", key="factorial_button"):
+            try:
+                result = factorial(int(num))
+                st.success(f"Factorial of {int(num)} is: {result}")
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
