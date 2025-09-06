@@ -142,3 +142,20 @@ class Matrix:
             base = base.multiply(base)
             k //= 2
         return result
+
+# 22bcs071 (factorial)
+def factorial(n: int) -> int:
+    """
+    Compute factorial of a non-negative integer n.
+    Raises ValueError if n is negative.
+    """
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers.")
+    if n == 0 or n == 1:
+        return 1
+    
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
